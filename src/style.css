@@ -79,4 +79,30 @@ li {
 .user-dashboard {
   background-color: rgba(13, 90, 61, 0.86);
   grid-row: 1/6;
+  display: flex;
+  flex-direction: column;
+  color: white;
 }
+
+.user-dashboard > h1{
+  align-self: center;
+  padding: 20px;
+  font-size: 50px;
+}
+
+.user-dashboard-menu {
+  padding: 20px 90px;
+}
+
+
+.user-tasks > li , .user-lists > li {
+  font-size: 20px;
+  margin: 20px;
+}
+
+.user-tasks > h2 , .user-lists > h2  {
+  font-size: 25px;
+}
+
+
+
