@@ -1,5 +1,6 @@
 
 
+const taskList = [];
 
 class Task {
 
@@ -13,15 +14,22 @@ class Task {
 //create Task
 //after creating task it should add to the list
 
-const taskList = []
 
-const buyGrocery = new Task("Buy grocery","2:30 PM");
 
-taskList.push(buyGrocery);
 
-function show() {
-  console.log(buyGrocery);
-  console.log(taskList);
+function addTask(name,time) {
+
+  let newTask = new Task(name,time);
+
+  taskList.push(newTask);
+
 }
 
-export {show, taskList};
+addTask("Buy grocery","2:30 PM");
+addTask("Cook dinner","6:00 PM");
+addTask("Study Spanish","8:00 PM");
+
+
+
+
+export { taskList };
