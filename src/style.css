@@ -1,0 +1,82 @@
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+
+li {
+  list-style: none;
+}
+
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+
+.header {
+  background-color: white;
+  display: grid;
+  grid-column: 2/6;
+  border: 2px solid black;
+}
+
+.user-banner {
+  display: flex;
+  padding: 30px;
+  gap: 50px;
+}
+
+.user-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.user-dashboard {
+  background-color: rgba(13, 90, 61, 0.86);
+  grid-row: 1/6;
+}
