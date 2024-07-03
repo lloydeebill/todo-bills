@@ -53,16 +53,19 @@ li {
 
 .container {
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 1fr 8fr;
   grid-template-rows: auto 1fr;
   min-height: 100vh;
 }
 
+/*header css*/
+
 .header {
   background-color: white;
   display: grid;
-  grid-column: 2/6;
-  border: 2px solid black;
+  grid-column: 2/9;
+  height: 100px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
 }
 
 .user-banner {
@@ -76,12 +79,33 @@ li {
   gap: 20px;
 }
 
+.user-nav > li > button {
+  background-color: rgba(221, 235, 229, 0.86);
+  border: none;
+  border-radius: 30px;
+  width: 120px;
+  height: 50px;
+  color: black;
+  font-weight: bold;
+}
+
+.user-icon {
+  color: black;
+  width: 50px;
+}
+
+.user-id {
+  display: flex;
+  gap: 20px;
+}
+
+/* dashboard css */
 .user-dashboard {
-  background-color: rgba(13, 90, 61, 0.86);
+  background-color: rgba(206, 214, 210, 0.945);
   grid-row: 1/6;
   display: flex;
   flex-direction: column;
-  color: white;
+  color: black;
 }
 
 .user-dashboard > h1{
