@@ -206,3 +206,9 @@ li {
   font-size: 20px;
 }
 
+.task-delete-button {
+  width: 20px; 
+  height: 20px; 
+  cursor: pointer;
+}
+

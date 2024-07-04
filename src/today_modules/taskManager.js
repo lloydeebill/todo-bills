@@ -3,6 +3,7 @@
 
 class Task {
   constructor(name,time) {
+    this.id = Date.now();
     this.name = name;
     this.time = time;
   }
@@ -24,6 +25,10 @@ class TaskManager {
 
   getTaskList() {
     return this.taskList
+  }
+
+  deleteTask(id) {
+    this.taskList = this.taskList.filter(task => task.id !== id);
   }
 }
 

@@ -1,5 +1,5 @@
 
-import { taskManager } from "./addTask";
+import { taskManager } from "./taskManager";
 import { showToday } from "./showToday";
 
 function showAddTaskWIndow() {
