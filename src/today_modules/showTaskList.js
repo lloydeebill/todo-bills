@@ -1,3 +1,4 @@
+import '../style.css';
 
 
 import { taskManager } from "./addTask";
@@ -6,7 +7,9 @@ import { taskManager } from "./addTask";
 
 function showTaskList() {
 
-  const contentContainer = document.querySelector(".content-container");
+  const todayListContainer = document.querySelector(".content-container");
+  todayListContainer.classList.add('today-list-container')
+  
 
   const tasks = taskManager.getTaskList();
 
@@ -16,13 +19,15 @@ function showTaskList() {
     const taskName = document.createElement("p");
     const taskTime = document.createElement("p");
 
+    taskElement.classList.add('task-element');
+
     taskName.innerText = task.name;
     taskTime.innerText = task.time;
 
     taskElement.appendChild(taskName);
     taskElement.appendChild(taskTime);
 
-    contentContainer.appendChild(taskElement);
+    todayListContainer.appendChild(taskElement);
 
 
   })
