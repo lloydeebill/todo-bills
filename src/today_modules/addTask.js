@@ -1,9 +1,7 @@
 
 
-const taskList = [];
 
 class Task {
-
   constructor(name,time) {
     this.name = name;
     this.time = time;
@@ -11,25 +9,26 @@ class Task {
 
 }
 
-//create Task
-//after creating task it should add to the list
+class TaskManager {
+  constructor(){
+    this.taskList = [];
+  }
 
+  addTask(name,time) {
 
+    let newTask = new Task(name,time);
+  
+    this.taskList.push(newTask);
+  
+  }
 
-
-function addTask(name,time) {
-
-  let newTask = new Task(name,time);
-
-  taskList.push(newTask);
-
+  getTaskList() {
+    return this.taskList
+  }
 }
 
-addTask("Buy grocery","2:30 PM");
-addTask("Cook dinner","6:00 PM");
-addTask("Study Spanish","8:00 PM");
+
+const taskManager = new TaskManager();
 
 
-
-
-export { taskList };
+export { taskManager };

@@ -1,5 +1,5 @@
 
-import { showTaskList } from "./listToday";
+import { showTaskList } from "./showTaskList";
 
 function showToday() {
   const content = document.querySelector('.user-content');
@@ -12,6 +12,8 @@ function showToday() {
 
   contentTitle.innerText = "TODAY ";
 
+
+  content.innerHTML = ''; 
   content.append(contentTitle,contentContainer);
 
   showTaskList();

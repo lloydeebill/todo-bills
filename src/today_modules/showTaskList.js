@@ -1,6 +1,6 @@
 
 
-import { taskList as importedTaskList } from "./addTask";
+import { taskManager } from "./addTask";
 
 
 
@@ -8,8 +8,9 @@ function showTaskList() {
 
   const contentContainer = document.querySelector(".content-container");
 
+  const tasks = taskManager.getTaskList();
 
-  importedTaskList.forEach(task => {
+  tasks.forEach(task => {
   
     const taskElement = document.createElement("div");
     const taskName = document.createElement("p");
