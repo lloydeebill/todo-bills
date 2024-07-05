@@ -6,23 +6,20 @@ import { taskManager } from "./taskManager";
 
 
 
-function showTaskList() {
-
-  const todayListContainer = document.querySelector(".content-container");
-
-  todayListContainer.innerHTML = ''; 
-  todayListContainer.classList.add('today-list-container')
-  
-
-  const tasks = taskManager.getTaskList();
-
-  tasks.forEach(task => {
-  
-    const taskElement = document.createElement("div");
-    const taskName = document.createElement("p");
+function createTaskElement(task){
+  const taskElement = document.createElement("div");
+    const taskName = document.createElement("label");
     const taskTime = document.createElement("p");
+    const taskCheckBox = document.createElement("input");
 
+    taskName.innerText = task.name;
+    taskName.setAttribute('for',task.name);
+    taskTime.innerText = task.time;
 
+    taskCheckBox.type = "checkbox";
+    taskCheckBox.id = task.name;
+    taskCheckBox.name = task.name;
+  
     const taskDeleteButton = document.createElement("img");
     taskDeleteButton.src = deleteIcon;
     taskDeleteButton.classList.add('task-delete-button');
@@ -35,17 +32,39 @@ function showTaskList() {
 
     taskElement.classList.add('task-element');
 
-    taskName.innerText = task.name;
-    taskTime.innerText = task.time;
+    /*
+  <div>
+    <input type="checkbox" id="scales" name="scales" checked />
+    <label for="scales">Scales</label>
+  </div>
 
+    */
 
+    
+
+    taskElement.appendChild(taskCheckBox);
     taskElement.appendChild(taskName);
     taskElement.appendChild(taskTime);
     taskElement.appendChild(taskDeleteButton);
 
+    return taskElement;
+
+}
+
+function showTaskList() {
+
+  const todayListContainer = document.querySelector(".content-container");
+
+  todayListContainer.innerHTML = ''; 
+  todayListContainer.classList.add('today-list-container')
+  
+
+  const tasks = taskManager.getTaskList();
+
+  tasks.forEach(task => {
+
+    const taskElement = createTaskElement(task);
     todayListContainer.appendChild(taskElement);
-
-
 
 
   })
