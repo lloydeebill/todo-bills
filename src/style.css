@@ -128,7 +128,7 @@ li {
   font-size: 25px;
 }
 
-.user-today , .user-home { 
+.user-today , .user-home , .user-calendar , .user-sticky-wall { 
   cursor: pointer;
 }
 
