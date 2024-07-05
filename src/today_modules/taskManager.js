@@ -35,5 +35,8 @@ class TaskManager {
 
 const taskManager = new TaskManager();
 
+taskManager.addTask("Buy Groceries","8:45");
+taskManager.addTask("Cook Lunch", "11:30");
+
 
 export { taskManager };
