@@ -147,7 +147,7 @@ li {
 
 /*add task form*/
 
-.modal {
+.task-modal , .sticky-modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -160,7 +160,7 @@ li {
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.modal-content {
+.task-modal-content , .sticky-modal-content{
   display: flex;
   position: absolute;
   left: 40%;
@@ -245,3 +245,25 @@ form > input {
   cursor: pointer;
 }
 
+
+/* sticky element */
+
+.sticky-list-container {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: 
+  repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.sticky-element {
+
+  border: 1px solid black;
+  padding: 20px;
+
+}
+
+.sticky-detail {
+  padding: 20px;
+  margin: 20px;
+
+}

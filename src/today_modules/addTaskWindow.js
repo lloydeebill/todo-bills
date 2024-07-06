@@ -6,8 +6,8 @@ function showAddTaskWIndow() {
 
 
   const addTaskButton = document.querySelector('.add-task');
-  const modal = document.querySelector('.modal');
-  const closeButton = document.querySelector('.close-button');
+  const modal = document.querySelector('.task-modal');
+  const closeButton = modal.querySelector('.close-button');
 
   addTaskButton.addEventListener("click", () => {
   modal.style.display = "block";

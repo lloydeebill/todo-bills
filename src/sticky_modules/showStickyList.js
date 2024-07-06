@@ -13,6 +13,8 @@ function createStickyElement(sticky) {
   stickyTitle.innerText = sticky.title; 
   stickyDetail.innerText = sticky.detail;
 
+  stickyElement.classList.add('sticky-element');
+
   const stickyDeleteButton = createDeleteButton();
 
   stickyDeleteButton.addEventListener("click", () => {
@@ -32,6 +34,7 @@ function showStickyList() {
   const stickyListContainer = document.querySelector(".content-container");
 
   stickyListContainer.innerHTML = '';
+  stickyListContainer.classList.add('sticky-list-container');
   
   const stickies = stickyManager.getStickyList();
 

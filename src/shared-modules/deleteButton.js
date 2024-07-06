@@ -11,8 +11,6 @@ function createDeleteButton() {
     deleteButton.src = deleteIcon;
     deleteButton.classList.add('delete-button');
 
-
-
     return deleteButton;
 }
 

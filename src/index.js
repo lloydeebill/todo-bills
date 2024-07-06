@@ -8,12 +8,14 @@ import { showHome } from './home_modules/showHome';
 import { showCalendar } from './calendar_modules/showCalendar';
 import { showStickyWall } from './sticky_modules/showSticky';
 import { showAddTaskWIndow } from './today_modules/addTaskWindow';
+import { showAddStickyWindow } from './sticky_modules/addStickyWindow';
 
 
 
 document.querySelector('.user-icon').src = userIcon;
 
 showAddTaskWIndow();
+showAddStickyWindow();
 showHome();
 
 
