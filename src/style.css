@@ -239,7 +239,7 @@ form > input {
   padding: 15px;
 }
 
-.task-delete-button {
+.delete-button {
   width: 20px; 
   height: 20px; 
   cursor: pointer;

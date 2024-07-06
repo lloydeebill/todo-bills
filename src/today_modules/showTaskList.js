@@ -1,5 +1,5 @@
 import '../style.css';
-import deleteIcon from '../assets/delete-icon.svg'
+import { createDeleteButton } from '../shared-modules/deleteButton';
 
 
 import { taskManager } from "./taskManager";
@@ -7,7 +7,8 @@ import { taskManager } from "./taskManager";
 
 
 function createTaskElement(task){
-  const taskElement = document.createElement("div");
+
+    const taskElement = document.createElement("div");
     const taskName = document.createElement("label");
     const taskTime = document.createElement("p");
     const taskCheckBox = document.createElement("input");
@@ -19,10 +20,8 @@ function createTaskElement(task){
     taskCheckBox.type = "checkbox";
     taskCheckBox.id = task.name;
     taskCheckBox.name = task.name;
-  
-    const taskDeleteButton = document.createElement("img");
-    taskDeleteButton.src = deleteIcon;
-    taskDeleteButton.classList.add('task-delete-button');
+
+    const taskDeleteButton = createDeleteButton();
 
     taskDeleteButton.addEventListener("click",() => {
       taskManager.deleteTask(task.id);
@@ -31,16 +30,6 @@ function createTaskElement(task){
 
 
     taskElement.classList.add('task-element');
-
-    /*
-  <div>
-    <input type="checkbox" id="scales" name="scales" checked />
-    <label for="scales">Scales</label>
-  </div>
-
-    */
-
-    
 
     taskElement.appendChild(taskCheckBox);
     taskElement.appendChild(taskName);

@@ -1,4 +1,5 @@
 
+import { showStickyList } from "./showStickyList";
 
 function showStickyWall() {
   const content = document.querySelector('.user-content');
@@ -15,7 +16,7 @@ function showStickyWall() {
   content.innerHTML = ''; 
   content.append(contentTitle,contentContainer);
 
-
+  showStickyList();
 
 }
 
