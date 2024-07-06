@@ -145,7 +145,7 @@ li {
 
 
 
-/*add task form*/
+/* Modal styles */
 
 .task-modal , .sticky-modal , .schedule-modal {
   display: none; /* Hidden by default */
@@ -160,7 +160,7 @@ li {
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.task-modal-content , .sticky-modal-content{
+.task-modal-content , .sticky-modal-content , .schedule-modal-content{
   display: flex;
   position: absolute;
   left: 40%;
