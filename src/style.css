@@ -147,7 +147,7 @@ li {
 
 /*add task form*/
 
-.task-modal , .sticky-modal {
+.task-modal , .sticky-modal , .schedule-modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -266,4 +266,20 @@ form > input {
   padding: 20px;
   margin: 20px;
 
+}
+
+/*calendar*/
+
+.calendar-month{
+
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+}
+
+.day-cell {
+
+  border: 1px solid black;
+  height: 100px;
 }

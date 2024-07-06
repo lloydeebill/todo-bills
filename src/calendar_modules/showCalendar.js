@@ -1,4 +1,5 @@
 
+import { generateCalendar } from "./generateCalendar";
 
 function showCalendar() {
   const content = document.querySelector('.user-content');
@@ -15,6 +16,7 @@ function showCalendar() {
   content.innerHTML = ''; 
   content.append(contentTitle,contentContainer);
 
+  generateCalendar(2024,7);
 
 
 }

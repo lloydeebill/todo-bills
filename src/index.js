@@ -16,7 +16,7 @@ document.querySelector('.user-icon').src = userIcon;
 
 showAddTaskWIndow();
 showAddStickyWindow();
-showHome();
+showCalendar();
 
 
 const homeButton = document.querySelector('.user-home');
