@@ -10,13 +10,13 @@ class Calendar {
     this.currentDayCell = null;
 
     this.initializeFormListener();
+    this.loadCalendarState();
   }
 
   initializeFormListener() {
     const form = this.modal.querySelector('#addScheduleForm');
 
     form.addEventListener('submit',(event) => {
-
       event.preventDefault();
       this.addScheduleCell();
     })
@@ -32,14 +32,12 @@ class Calendar {
     const calendarMonth = document.createElement('div');
     calendarMonth.classList.add('calendar-month')
 
-
     const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; 
 
     calendarContainer.innerHTML = '';
 
     const firstDay = new Date(this.year, this.month, 1).getDay();
     const totalDays = new Date(this.year, this.month + 1, 0).getDate();
-
 
     for(let i = 0; i < firstDay; i++) {
       const emptyCell = document.createElement('div');
@@ -62,32 +60,26 @@ class Calendar {
   
   
       dayCell.addEventListener('click',() => this.showScheduleModal(dayCell));
-  
       calendarMonth.appendChild(dayCell);
   
     }
   
     calendarContainer.append(calendarMonth);
-
-
+    this.loadSchedules();
   }
 
   showScheduleModal(dayCell) {
 
     this.modal.style.display = "block";
     this.currentDayCell = dayCell;
+
   }
 
 
   addScheduleCell() {
 
     const scheduleName = this.modal.querySelector('#scheduleName').value;
-    const scheduleCheckBox = document.createElement('input');
-
-    scheduleCheckBox.type = "checkbox";
-    scheduleCheckBox.id = scheduleName;
-    scheduleCheckBox.name = scheduleName;
-
+    
     const scheduleContent = document.createElement('div');
     scheduleContent.classList.add('schedule-content');
     const addSchedulePrompt = document.querySelector('.add-schedule-prompt');
@@ -104,10 +96,18 @@ class Calendar {
       event.stopPropagation();
       this.currentDayCell.removeChild(scheduleContent);
 
+      this.saveCalendarState();
+
       if(this.currentDayCell.querySelectorAll('.schedule-content').length === 0){
         addSchedulePrompt.style.display = "block";
       }
     })
+
+    const scheduleCheckBox = document.createElement('input');
+
+    scheduleCheckBox.type = "checkbox";
+    scheduleCheckBox.id = scheduleName;
+    scheduleCheckBox.name = scheduleName;
 
     scheduleCheckBox.addEventListener('click', (event) => {
       event.stopPropagation(); 
@@ -120,6 +120,95 @@ class Calendar {
 
     this.modal.style.display = "none";
     this.modal.querySelector('#addScheduleForm').reset();
+
+    this.saveCalendarState();
+  }
+
+  saveCalendarState() {
+    
+    const calendarState = {};
+    const dayCells = document.querySelectorAll('.day-cell');
+    
+    dayCells.forEach(dayCell => {
+      const day = dayCell.getAttribute('data-day');
+      const schedules = [];
+      const scheduleContents = dayCell.querySelectorAll('.schedule-content');
+
+      scheduleContents.forEach(scheduleContent=> {
+        const scheduleName = scheduleContent.querySelector('p').innerText;
+        schedules.push(scheduleName);
+      });
+
+      if (schedules.length > 0) {
+        calendarState[day] = schedules;
+      }
+    })
+
+    localStorage.setItem('calendarState',JSON.stringify(calendarState));
+  }
+
+  loadCalendarState() {
+    const calendarState = JSON.parse(localStorage.getItem('calendarState'));
+
+    if (calendarState) {
+      this.calendarState = calendarState;
+    } else {
+      this.calendarState = {};
+    }
+  }
+
+  loadSchedules() {
+    const calendarState = this.calendarState;
+    const dayCells = document.querySelectorAll('.day-cell');
+
+    dayCells.forEach(dayCell => {
+      const day = dayCell.getAttribute('data-day');
+
+      if (calendarState[day]){
+        calendarState[day].forEach(scheduleName => {
+          const scheduleContent = document.createElement('div');
+          scheduleContent.classList.add('schedule-content');
+          scheduleContent.innerHTML = `<p>${scheduleName}</p>`;
+
+          const deleteButton = createDeleteButton();
+
+          deleteButton.addEventListener('click',(event)=>{
+            event.stopPropagation();
+            dayCell.removeChild(scheduleContent);
+            this.saveCalendarState();
+            
+            if(dayCell.querySelectorAll('.schedule-content').length === 0){ 
+              const addSchedulePrompt = dayCell.querySelector('.add-schedule-prompt');
+              if (addSchedulePrompt) {
+                addSchedulePrompt.style.display = "block";
+              }
+              
+            }
+          })
+
+          const scheduleCheckBox = document.createElement('input');
+
+          scheduleCheckBox.type = "checkbox";
+          scheduleCheckBox.id = scheduleName;
+          scheduleCheckBox.name = scheduleName;
+
+          scheduleCheckBox.addEventListener('click', (event) => {
+            event.stopPropagation(); 
+          });
+        
+      
+          scheduleContent.appendChild(scheduleCheckBox);
+          scheduleContent.appendChild(deleteButton);
+          dayCell.appendChild(scheduleContent);
+
+          const addSchedulePrompt = dayCell.querySelector('.add-schedule-prompt');
+          if (addSchedulePrompt) {
+            addSchedulePrompt.style.display = "none";
+          }
+
+        })
+      }
+    })
   }
 }
 

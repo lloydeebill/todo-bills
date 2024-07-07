@@ -10,7 +10,7 @@ class Sticky {
 
 class StickyManager {
   constructor(){
-    this.stickyList = [];
+    this.stickyList = this.loadStickies() || [];
   }
 
   addSticky(title,detail) {
@@ -18,6 +18,7 @@ class StickyManager {
     let newSticky = new Sticky(title,detail);
 
     this.stickyList.push(newSticky);
+    this.saveStickies();
   }
 
   getStickyList() {
@@ -28,27 +29,27 @@ class StickyManager {
 
     this.stickyList = this.stickyList
     .filter(sticky => sticky.id !== id);
+    this.saveStickies();
+  }
+
+  saveStickies() {
+    localStorage.setItem('stickyList',JSON.stringify(this.stickyList));
+  }
+
+  loadStickies() {
+    const stickies = localStorage.getItem('stickyList');
+
+    if (stickies) {
+      const parsedStickies = JSON.parse(stickies);
+      return parsedStickies.map(sticky => new Sticky(sticky.title, sticky.detail));
+    }
+
+    return [];
   }
 }
 
 const stickyManager = new StickyManager();
 
-stickyManager.addSticky("Get Details","Lorem ipsum dolor sit, amet consectetur adipisicing elit. Delectus expedita maiores nam sequi voluptatum ducimus vero doloremque ullam voluptatibus nisi natus repudiandae, sunt neque praesentium? Rem, quidem. Similique, fuga consequatur?");
-
-stickyManager.addSticky("Research Project","Lorem ipsum dolor sit, amet consectetur adipisicing elit. Delectus expedita maiores nam sequi voluptatum ducimus vero doloremque ullam voluptatibus nisi natus repudiandae, sunt neque praesentium? Rem, quidem. Similique, fuga consequatur?");
-
-
-stickyManager.addSticky("Grocery List","Lorem ipsum dolor sit, amet consectetur adipisicing elit. Delectus expedita maiores nam sequi voluptatum ducimus vero doloremque ullam voluptatibus nisi natus repudiandae, sunt neque praesentium? Rem, quidem. Similique, fuga consequatur?");
-
-stickyManager.addSticky("Research Project","Lorem ipsum dolor sit, amet consectetur adipisicing elit. Delectus expedita maiores nam sequi voluptatum ducimus vero doloremque ullam voluptatibus nisi natus repudiandae, sunt neque praesentium? Rem, quidem. Similique, fuga consequatur?");
-
-
-stickyManager.addSticky("Grocery List","Lorem ipsum dolor sit, amet consectetur adipisicing elit. Delectus expedita maiores nam sequi voluptatum ducimus vero doloremque ullam voluptatibus nisi natus repudiandae, sunt neque praesentium? Rem, quidem. Similique, fuga consequatur?");
-
-stickyManager.addSticky("Research Project","Lorem ipsum dolor sit, amet consectetur adipisicing elit. Delectus expedita maiores nam sequi voluptatum ducimus vero doloremque ullam voluptatibus nisi natus repudiandae, sunt neque praesentium? Rem, quidem. Similique, fuga consequatur?");
-
-
-stickyManager.addSticky("Grocery List","Lorem ipsum dolor sit, amet consectetur adipisicing elit. Delectus expedita maiores nam sequi voluptatum ducimus vero doloremque ullam voluptatibus nisi natus repudiandae, sunt neque praesentium? Rem, quidem. Similique, fuga consequatur?");
 
 
 
