@@ -1,60 +1,107 @@
 
-function generateCalendar(year,month) {
+import { createDeleteButton } from "../shared-modules/deleteButton";
 
-  
+class Calendar {
+  constructor(year,month) {
+    this.year = year;
+    this.month = month;
+    this.modal = document.querySelector('.schedule-modal');
+    this.closeButton = this.modal.querySelector('.close-button');
+    this.currentDayCell = null;
 
-  const calendarContainer = document.querySelector('.content-container');
-
-  const calendarMonth = document.createElement('div');
-  calendarMonth.classList.add('calendar-month')
-
-  const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; 
-
-  calendarContainer.innerHTML = '';
-
-  const firstDay = new Date(year, month, 1).getDay();
-  const totalDays = new Date(year,month + 1, 0).getDate();
-  
-
-  for(let i = 0; i < firstDay; i++) {
-    const emptyCell = document.createElement('div');
-    calendarContainer.appendChild(emptyCell);
+    this.initializeFormListener();
   }
 
-  const modal = document.querySelector('.schedule-modal');
-  const closeButton = modal.querySelector('.close-button');
+  initializeFormListener() {
+    const form = this.modal.querySelector('#addScheduleForm');
 
-  
+    form.addEventListener('submit',(event) => {
 
-  for (let day = 1; day <= totalDays; day++) {
-
-    const dayCell = document.createElement('div');
-    dayCell.innerText = day;
-    dayCell.classList.add('day-cell');
-    dayCell.setAttribute('data-day',day);
-
-    const dayOfWeek = new Date(year, month, day).getDay();
-    dayCell.innerHTML = `<span class="date-number">${day}</span><span class="day-name">${weekdays[dayOfWeek]}</span>`;
-
-
-    dayCell.addEventListener('click',() => {
-  
-      modal.style.display = "block";
-  
-      closeButton.addEventListener("click", () => {
-      modal.style.display = "none";
-      })
+      event.preventDefault();
+      this.addScheduleCell();
     })
 
-    calendarMonth.appendChild(dayCell);
+    this.closeButton.addEventListener('click',() => {
+      this.modal.style.display = "none"
+    })
+  }
+
+  generateCalendar() {
+
+    const calendarContainer = document.querySelector('.content-container');
+    const calendarMonth = document.createElement('div');
+    calendarMonth.classList.add('calendar-month')
+
+
+    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; 
+
+    calendarContainer.innerHTML = '';
+
+    const firstDay = new Date(this.year, this.month, 1).getDay();
+    const totalDays = new Date(this.year, this.month + 1, 0).getDate();
+
+
+    for(let i = 0; i < firstDay; i++) {
+      const emptyCell = document.createElement('div');
+      calendarContainer.appendChild(emptyCell);
+    }
+
+    for (let day = 1; day <= totalDays; day++) {
+
+      const dayCell = document.createElement('div');
+      dayCell.innerText = day;
+      dayCell.classList.add('day-cell');
+      dayCell.setAttribute('data-day',day);
+  
+      const dayOfWeek = new Date(this.year, this.month, day).getDay();
+      dayCell.innerHTML = `<span class="date-number">${day}</span><span class="day-name">${weekdays[dayOfWeek]}</span>`;
+  
+  
+      dayCell.addEventListener('click',() => this.showScheduleModal(dayCell));
+  
+      calendarMonth.appendChild(dayCell);
+  
+    }
+  
+    calendarContainer.append(calendarMonth);
+
 
   }
 
-  calendarContainer.append(calendarMonth);
-  
+  showScheduleModal(dayCell) {
+
+    this.modal.style.display = "block";
+    this.currentDayCell = dayCell;
+  }
+
+
+  addScheduleCell() {
+
+    const scheduleName = this.modal.querySelector('#scheduleName').value;
+    const scheduleDetail = this.modal.querySelector('#scheduleDetail').value;
+
+    const scheduleContent = document.createElement('div');
+    scheduleContent.classList.add('schedule-content');
+    scheduleContent.innerHTML = `<p>${scheduleName}</p><p>${scheduleDetail}</p>`
+    
+
+    const deleteButton = createDeleteButton();
+
+    deleteButton.addEventListener('click',()=>{
+      this.currentDayCell.removeChild(scheduleContent);
+    })
+
+    scheduleContent.appendChild(deleteButton);
+    this.currentDayCell.appendChild(scheduleContent);
+
+    this.modal.style.display = "none";
+    this.modal.querySelector('#addScheduleForm').reset();
+  }
 }
 
 
 
 
-export { generateCalendar};
+
+export { Calendar }
+
