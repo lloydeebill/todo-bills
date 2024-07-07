@@ -10,11 +10,18 @@ function showToday() {
   const contentContainer = document.createElement('div'); 
   contentContainer.classList.add('content-container');
 
+
+  const today = new Date();
+  const options = { weekday: 'long', month: 'long', day: 'numeric' };
+  const currentDayOfWeek = today.toLocaleDateString('en-US', options);
+
+  const todayTitle = document.createElement('h2');
+  todayTitle.innerText = `${currentDayOfWeek}`;
+
   contentTitle.innerText = "Today";
 
-
   content.innerHTML = ''; 
-  content.append(contentTitle,contentContainer);
+  content.append(contentTitle, todayTitle, contentContainer);
 
   showTaskList();
 
