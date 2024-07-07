@@ -12,14 +12,15 @@ class Task {
 
 class TaskManager {
   constructor(){
-    this.taskList = [];
+    this.taskList = this.loadTasks() || [];
   }
 
   addTask(name,time) {
 
-    let newTask = new Task(name,time);
+    const newTask = new Task(name,time);
   
     this.taskList.push(newTask);
+    this.saveTasks();
   
   }
 
@@ -29,14 +30,27 @@ class TaskManager {
 
   deleteTask(id) {
     this.taskList = this.taskList.filter(task => task.id !== id);
+    this.saveTasks();
   }
+  
+  saveTasks() {
+    localStorage.setItem('taskList',JSON.stringify(this.taskList));
+  }
+
+  loadTasks() {
+    const tasks = localStorage.getItem('taskList');
+    if (tasks) {
+      const parsedTasks = JSON.parse(tasks);
+      return parsedTasks.map(task => new Task(task.name , task.time));
+    }
+    return [];
+  }
+
 }
 
 
 const taskManager = new TaskManager();
 
-taskManager.addTask("Buy Groceries","8:45");
-taskManager.addTask("Cook Lunch", "11:30");
 
 
 export { taskManager };
