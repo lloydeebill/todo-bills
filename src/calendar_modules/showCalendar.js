@@ -9,12 +9,24 @@ function showCalendar() {
   const contentContainer = document.createElement('div'); 
   contentContainer.classList.add('content-container');
 
+  const calendarTitle = document.createElement('h2');
+
+  const monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  const calendar = new Calendar(2024, 6);
+  const monthIndex = calendar.month;
+  const monthName = monthNames[monthIndex];
+
+  calendarTitle.innerText = `${monthName} ${calendar.year}`
+
   contentTitle.innerText = "Calendar";
 
   content.innerHTML = ''; 
-  content.append(contentTitle, contentContainer);
+  content.append(contentTitle, calendarTitle,contentContainer);
 
-  const calendar = new Calendar(2024, 6);
   calendar.generateCalendar();
 }
 

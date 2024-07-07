@@ -54,7 +54,10 @@ class Calendar {
       dayCell.setAttribute('data-day',day);
   
       const dayOfWeek = new Date(this.year, this.month, day).getDay();
-      dayCell.innerHTML = `<span class="date-number">${day}</span><span class="day-name">${weekdays[dayOfWeek]}</span>
+      dayCell.innerHTML = `<div>
+      <span class="date-number">${day}</span>
+      <span class="day-name">${weekdays[dayOfWeek]}</span>
+      </div>
       <p class='add-schedule-prompt'>Click to add Schedule</p>`;
   
   
@@ -79,7 +82,11 @@ class Calendar {
   addScheduleCell() {
 
     const scheduleName = this.modal.querySelector('#scheduleName').value;
-    const scheduleDetail = this.modal.querySelector('#scheduleDetail').value;
+    const scheduleCheckBox = document.createElement('input');
+
+    scheduleCheckBox.type = "checkbox";
+    scheduleCheckBox.id = scheduleName;
+    scheduleCheckBox.name = scheduleName;
 
     const scheduleContent = document.createElement('div');
     scheduleContent.classList.add('schedule-content');
@@ -88,12 +95,13 @@ class Calendar {
     if (addSchedulePrompt) {
       addSchedulePrompt.style.display = "none";
     }
-    scheduleContent.innerHTML = `<p>${scheduleName}</p><p>${scheduleDetail}</p>`
+    scheduleContent.innerHTML = `<p>${scheduleName}</p>`
     
 
     const deleteButton = createDeleteButton();
 
-    deleteButton.addEventListener('click',()=>{
+    deleteButton.addEventListener('click',(event)=>{
+      event.stopPropagation();
       this.currentDayCell.removeChild(scheduleContent);
 
       if(this.currentDayCell.querySelectorAll('.schedule-content').length === 0){
@@ -101,6 +109,12 @@ class Calendar {
       }
     })
 
+    scheduleCheckBox.addEventListener('click', (event) => {
+      event.stopPropagation(); 
+    });
+  
+
+    scheduleContent.appendChild(scheduleCheckBox);
     scheduleContent.appendChild(deleteButton);
     this.currentDayCell.appendChild(scheduleContent);
 
