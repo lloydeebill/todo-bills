@@ -54,7 +54,8 @@ class Calendar {
       dayCell.setAttribute('data-day',day);
   
       const dayOfWeek = new Date(this.year, this.month, day).getDay();
-      dayCell.innerHTML = `<span class="date-number">${day}</span><span class="day-name">${weekdays[dayOfWeek]}</span>`;
+      dayCell.innerHTML = `<span class="date-number">${day}</span><span class="day-name">${weekdays[dayOfWeek]}</span>
+      <p class='add-schedule-prompt'>Click to add Schedule</p>`;
   
   
       dayCell.addEventListener('click',() => this.showScheduleModal(dayCell));
@@ -82,6 +83,11 @@ class Calendar {
 
     const scheduleContent = document.createElement('div');
     scheduleContent.classList.add('schedule-content');
+    const addSchedulePrompt = document.querySelector('.add-schedule-prompt');
+
+    if (addSchedulePrompt) {
+      addSchedulePrompt.style.display = "none";
+    }
     scheduleContent.innerHTML = `<p>${scheduleName}</p><p>${scheduleDetail}</p>`
     
 
@@ -89,6 +95,10 @@ class Calendar {
 
     deleteButton.addEventListener('click',()=>{
       this.currentDayCell.removeChild(scheduleContent);
+
+      if(this.currentDayCell.querySelectorAll('.schedule-content').length === 0){
+        addSchedulePrompt.style.display = "block";
+      }
     })
 
     scheduleContent.appendChild(deleteButton);
