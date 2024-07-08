@@ -3,6 +3,9 @@
 import './style.css'
 
 import userIcon from './assets/account-icon.svg'
+import calendarIcon from './assets/calendar-month.svg'
+import stickyIcon from './assets/sticky-note.svg'
+import todayIcon from './assets/today.svg'
 import { showToday } from './today_modules/showToday';
 import { showCalendar } from './calendar_modules/showCalendar';
 import { showStickyWall } from './sticky_modules/showSticky';
@@ -12,10 +15,13 @@ import { showAddStickyWindow } from './sticky_modules/addStickyWindow';
 
 
 document.querySelector('.user-icon').src = userIcon;
+document.querySelector('.calendar-icon').src = calendarIcon;
+document.querySelector('.sticky-icon').src = stickyIcon;
+document.querySelector('.today-icon').src = todayIcon;
 
 showAddTaskWIndow();
 showAddStickyWindow();
-showCalendar();
+showToday();
 
 const todayButton = document.querySelector('.user-today');
 const calendarButton = document.querySelector('.user-calendar');

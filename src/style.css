@@ -110,7 +110,7 @@ html {
 
 /* dashboard css */
 .user-dashboard {
-  background-color: rgb(240, 235, 235);
+  background-color: rgba(221, 235, 229, 0.86);
   grid-row: 1/6;
   display: flex;
   flex-direction: column;
@@ -128,19 +128,27 @@ html {
 
 .user-dashboard-menu {
   margin-left: 60px;
+  margin-top: 10px;
 }
 
 
-.user-tasks > li , .user-lists > li {
-  font-size: 20px;
-  margin: 20px;
+.user-tasks > div > li , .user-lists > li {
+  font-size: 25px;
+  margin: 10px;
 }
 
-.user-tasks > li , .user-lists > li {
-  font-size: 20px;
-  margin: 20px;
+.user-tasks {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
+.user-tasks > div {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
 
 .user-tasks > h2 , .user-lists > h2  {
   font-size: 25px;
@@ -269,6 +277,11 @@ form > input {
   cursor: pointer;
 }
 
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
 
 /* sticky element */
 
@@ -395,3 +408,6 @@ form > input {
   height: 200px;
 } 
 
+span {
+  font-weight: bold;
+}
