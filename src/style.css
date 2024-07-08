@@ -116,6 +116,7 @@ html {
   color: black;
   margin: 15px;
   border-radius: 10px;
+  width: 300px;
 }
 
 .user-dashboard > h1{
@@ -125,7 +126,7 @@ html {
 }
 
 .user-dashboard-menu {
-  margin-left: 30px;
+  margin-left: 60px;
 }
 
 
@@ -195,17 +196,11 @@ html {
   flex-direction: column;
   width: 450px;
   height: 300px;
-  border-radius: 20px;
+  border-radius: 15px;
   margin: 12px;
+  padding: 10px;
 }
 
-.form-content > div {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  gap: 120px;
-  
-}
 
 .form-content > label , .form-content > input , .form-content > button {
   margin: 10px 10px;
@@ -220,6 +215,14 @@ form > .add-button {
 
 form > input {
   padding: 5px;
+}
+
+.form-title {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 120px;
+  
 }
 
 
@@ -258,25 +261,56 @@ form > input {
 
 /* sticky element */
 
+.sticky-modal-content > .form-content{
+  width: 500px;
+  height: 550px;
+}
+
 .sticky-list-container {
   display: grid;
   gap: 40px;
-  grid-template-columns: 
-  repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(5, 2fr);
 }
 
 .sticky-element {
 
-  border: 1px solid black;
+  background-color: rgb(255, 231, 97);
+  border-radius: 10px;
   padding: 20px;
+  min-height: 300px;
 
 }
 
 .sticky-detail {
-  padding: 20px;
-  margin: 20px;
+  margin: 10px 30px;
+  padding: 5px;
+  height: 200px;
 
 }
+
+.color-picker {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start;
+  margin: 10px 30px;
+}
+
+.color-option {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.color-option.selected {
+  border: 2px solid grey;
+}
+
+
+
+
+
 
 /*calendar*/
 

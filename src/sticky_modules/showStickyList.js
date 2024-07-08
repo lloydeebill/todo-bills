@@ -15,6 +15,8 @@ function createStickyElement(sticky) {
 
   stickyElement.classList.add('sticky-element');
 
+  stickyElement.style.backgroundColor = sticky.color;
+
   const stickyDeleteButton = createDeleteButton();
 
   stickyDeleteButton.addEventListener("click", () => {

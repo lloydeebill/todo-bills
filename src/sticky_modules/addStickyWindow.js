@@ -19,6 +19,20 @@ function showAddStickyWindow() {
   modal.style.display = "none";
   })
 
+  const colorPicker = document.querySelector('#stickyColorPicker');
+  const colorOptions = colorPicker.querySelectorAll('.color-option');
+  const stickyColorInput = document.querySelector('#stickyColor');
+
+  colorOptions.forEach(option => {
+    option.addEventListener('click',()=> {
+      const selectedColor = option.getAttribute('data-color');
+      stickyColorInput.value =selectedColor;
+
+      colorOptions.forEach(opt => opt.classList.remove('selected'));
+      option.classList.add('selected');
+    })
+  })
+
   const addStickyForm = document.querySelector('#addStickyForm');
 
   addStickyForm.addEventListener('submit', (event) => {
@@ -26,11 +40,16 @@ function showAddStickyWindow() {
 
     const stickyName = document.querySelector('#stickyName').value;
     const stickyDetail = document.querySelector('#stickyDetail').value;
+    const stickyColor = document.querySelector('#stickyColor').value;
 
-    stickyManager.addSticky(stickyName, stickyDetail);
+    stickyManager.addSticky(stickyName, stickyDetail, stickyColor);
 
     document.querySelector('#stickyName').value = '';
     document.querySelector('#stickyDetail').value = '';
+    document.querySelector('#stickyColor').value = '';
+
+    colorOptions.forEach(opt => opt.classList.remove('selected'));
+    colorOptions[0].classList.add('selected');
 
     modal.style.display = 'none';
 
