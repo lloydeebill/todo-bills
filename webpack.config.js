@@ -6,12 +6,13 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
+    assetModuleFilename: 'img/[name][ext]',
   },
   devtool: 'inline-source-map',
   plugins: [
     new HtmlWebpackPlugin({
       title: "Todo List",
-      template: 'src/index.html'
+      template: './src/index.html' 
     })
   ],
   module: {
