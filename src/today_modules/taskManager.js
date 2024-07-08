@@ -2,10 +2,14 @@
 
 
 class Task {
-  constructor(name,time) {
-    this.id = Date.now();
+  constructor(name,time, id = null) {
+    this.id = this.generateUniqueId();
     this.name = name;
     this.time = time;
+  }
+
+  generateUniqueId() {
+    return `tt-${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
   }
 
 }

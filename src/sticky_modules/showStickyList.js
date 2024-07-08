@@ -9,6 +9,10 @@ function createStickyElement(sticky) {
   const stickyElement = document.createElement("div");
   const stickyTitle = document.createElement("h3");
   const stickyDetail = document.createElement("p");
+  const stickyDetailContainer = document.createElement("div");
+
+  stickyDetailContainer.classList.add('sticky-detail-container');
+
 
   stickyTitle.innerText = sticky.title; 
   stickyDetail.innerText = sticky.detail;
@@ -25,7 +29,8 @@ function createStickyElement(sticky) {
   })
 
   stickyElement.appendChild(stickyTitle);
-  stickyElement.appendChild(stickyDetail);
+  stickyDetailContainer.appendChild(stickyDetail);
+  stickyElement.appendChild(stickyDetailContainer);
   stickyElement.appendChild(stickyDeleteButton);
 
   return stickyElement;

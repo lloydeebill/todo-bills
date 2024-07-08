@@ -15,7 +15,7 @@ document.querySelector('.user-icon').src = userIcon;
 
 showAddTaskWIndow();
 showAddStickyWindow();
-showStickyWall();
+showCalendar();
 
 const todayButton = document.querySelector('.user-today');
 const calendarButton = document.querySelector('.user-calendar');

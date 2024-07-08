@@ -59,6 +59,7 @@ html {
   grid-template-columns: 1fr 8fr;
   grid-template-rows: auto 1fr;
   min-height: 100vh;
+  padding: 5px;
 }
 
 
@@ -88,7 +89,7 @@ html {
 .user-nav > li > button {
   background-color: rgba(221, 235, 229, 0.86);
   border: none;
-  border-radius: 30px;
+  border-radius: 15px;
   width: 150px;
   height: 50px;
   color: black;
@@ -109,7 +110,7 @@ html {
 
 /* dashboard css */
 .user-dashboard {
-  background-color: rgba(206, 214, 210, 0.945);
+  background-color: rgb(240, 235, 235);
   grid-row: 1/6;
   display: flex;
   flex-direction: column;
@@ -135,6 +136,12 @@ html {
   margin: 20px;
 }
 
+.user-tasks > li , .user-lists > li {
+  font-size: 20px;
+  margin: 20px;
+}
+
+
 .user-tasks > h2 , .user-lists > h2  {
   font-size: 25px;
 }
@@ -142,6 +149,8 @@ html {
 .user-today , .user-home , .user-calendar , .user-sticky-wall { 
   cursor: pointer;
 }
+
+
 
 
 /*user content*/ 
@@ -154,7 +163,9 @@ html {
   margin-bottom: 20px;
 }
 
-
+.content-container {
+  margin: 10px;
+}
 
 /* Modal styles */
 
@@ -174,8 +185,8 @@ html {
 .task-modal-content , .sticky-modal-content , .schedule-modal-content{
   display: flex;
   position: absolute;
-  left: 40%;
-  top: 20%;
+  left: 35%;
+  top: 10%;
 }
 
 .modal-content > div {
@@ -269,7 +280,7 @@ form > input {
 .sticky-list-container {
   display: grid;
   gap: 40px;
-  grid-template-columns: repeat(5, 2fr);
+  grid-template-columns: repeat(5, 1fr);
 }
 
 .sticky-element {
@@ -277,8 +288,19 @@ form > input {
   background-color: rgb(255, 231, 97);
   border-radius: 10px;
   padding: 20px;
+  max-height: 300px;
   min-height: 300px;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: auto;
 
+}
+
+.sticky-element > p {
+  word-wrap: break-word; /* Ensure long words break to fit the container */
+  white-space: pre-wrap; /* Preserve whitespace formatting */
 }
 
 .sticky-detail {
@@ -286,6 +308,10 @@ form > input {
   padding: 5px;
   height: 200px;
 
+}
+
+.sticky-element > h3 {
+  margin-bottom: 10px;  
 }
 
 .color-picker {
@@ -307,26 +333,38 @@ form > input {
   border: 2px solid grey;
 }
 
+.sticky-element > .delete-button {
+  display: flex;
+  align-self: end;
+  justify-content: end;
+}
+
+.sticky-detail-container {
+  flex-grow: 1;
 
 
-
-
+}
 
 /*calendar*/
 
 .calendar-month{
   display: grid;
-  gap: 40px;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
 
+}
+
+.calendar-title {
+  margin: 20px 0;
 }
 
 .day-cell {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   border: 1px solid black;
   height: 200px;
+  border-radius: 15px;
+  overflow: auto;
 }
 
 .day-cell > div {
@@ -340,8 +378,10 @@ form > input {
 }
 
 .add-schedule-prompt {
+  margin-top: 25px;
   align-self: center;
   display: block;
+  color: #A9A9A9;
 }
 
 .schedule-content {
@@ -349,3 +389,9 @@ form > input {
   justify-content: center;
   align-items: center;
 }
+
+
+.schedule {
+  height: 200px;
+} 
+

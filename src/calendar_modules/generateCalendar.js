@@ -77,52 +77,55 @@ class Calendar {
 
 
   addScheduleCell() {
-
     const scheduleName = this.modal.querySelector('#scheduleName').value;
-    
+  
     const scheduleContent = document.createElement('div');
     scheduleContent.classList.add('schedule-content');
-    const addSchedulePrompt = document.querySelector('.add-schedule-prompt');
-
+  
+    const addSchedulePrompt = this.currentDayCell.querySelector('.add-schedule-prompt');
+  
     if (addSchedulePrompt) {
       addSchedulePrompt.style.display = "none";
     }
-    scheduleContent.innerHTML = `<p>${scheduleName}</p>`
-    
-
+  
+    scheduleContent.innerHTML = `<p>${scheduleName}</p>`;
+  
     const deleteButton = createDeleteButton();
-
-    deleteButton.addEventListener('click',(event)=>{
+  
+    deleteButton.addEventListener('click', (event) => {
       event.stopPropagation();
-      this.currentDayCell.removeChild(scheduleContent);
+      const parentCell = event.target.closest('.day-cell');
+      if (parentCell && parentCell.contains(scheduleContent)) {
+        parentCell.removeChild(scheduleContent);
+        this.saveCalendarState();
 
-      this.saveCalendarState();
-
-      if(this.currentDayCell.querySelectorAll('.schedule-content').length === 0){
-        addSchedulePrompt.style.display = "block";
+        if (parentCell.querySelectorAll('.schedule-content').length === 0) {
+          if (addSchedulePrompt) {
+            addSchedulePrompt.style.display = "block";
+          }
+        }
       }
-    })
-
+    });
+  
     const scheduleCheckBox = document.createElement('input');
-
     scheduleCheckBox.type = "checkbox";
     scheduleCheckBox.id = scheduleName;
     scheduleCheckBox.name = scheduleName;
-
+  
     scheduleCheckBox.addEventListener('click', (event) => {
-      event.stopPropagation(); 
+      event.stopPropagation();
     });
   
-
     scheduleContent.appendChild(scheduleCheckBox);
     scheduleContent.appendChild(deleteButton);
     this.currentDayCell.appendChild(scheduleContent);
-
+  
     this.modal.style.display = "none";
     this.modal.querySelector('#addScheduleForm').reset();
-
+  
     this.saveCalendarState();
   }
+  
 
   saveCalendarState() {
     
@@ -160,56 +163,56 @@ class Calendar {
   loadSchedules() {
     const calendarState = this.calendarState;
     const dayCells = document.querySelectorAll('.day-cell');
-
+  
     dayCells.forEach(dayCell => {
       const day = dayCell.getAttribute('data-day');
-
-      if (calendarState[day]){
+  
+      if (calendarState[day]) {
         calendarState[day].forEach(scheduleName => {
           const scheduleContent = document.createElement('div');
           scheduleContent.classList.add('schedule-content');
           scheduleContent.innerHTML = `<p>${scheduleName}</p>`;
-
+  
           const deleteButton = createDeleteButton();
-
-          deleteButton.addEventListener('click',(event)=>{
+  
+          deleteButton.addEventListener('click', (event) => {
             event.stopPropagation();
-            dayCell.removeChild(scheduleContent);
-            this.saveCalendarState();
-            
-            if(dayCell.querySelectorAll('.schedule-content').length === 0){ 
-              const addSchedulePrompt = dayCell.querySelector('.add-schedule-prompt');
-              if (addSchedulePrompt) {
-                addSchedulePrompt.style.display = "block";
+            const parentCell = event.target.closest('.day-cell');
+            if (parentCell && parentCell.contains(scheduleContent)) {
+              parentCell.removeChild(scheduleContent);
+              this.saveCalendarState();
+
+              if (parentCell.querySelectorAll('.schedule-content').length === 0) {
+                const addSchedulePrompt = parentCell.querySelector('.add-schedule-prompt');
+                if (addSchedulePrompt) {
+                  addSchedulePrompt.style.display = "block";
+                }
               }
-              
             }
-          })
-
+          });
+  
           const scheduleCheckBox = document.createElement('input');
-
           scheduleCheckBox.type = "checkbox";
           scheduleCheckBox.id = scheduleName;
           scheduleCheckBox.name = scheduleName;
-
+  
           scheduleCheckBox.addEventListener('click', (event) => {
-            event.stopPropagation(); 
+            event.stopPropagation();
           });
-        
-      
+  
           scheduleContent.appendChild(scheduleCheckBox);
           scheduleContent.appendChild(deleteButton);
           dayCell.appendChild(scheduleContent);
-
+  
           const addSchedulePrompt = dayCell.querySelector('.add-schedule-prompt');
           if (addSchedulePrompt) {
             addSchedulePrompt.style.display = "none";
           }
-
-        })
+        });
       }
-    })
+    });
   }
+  
 }
 
 

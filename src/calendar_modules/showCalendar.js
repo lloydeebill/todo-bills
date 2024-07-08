@@ -21,6 +21,7 @@ function showCalendar() {
   const monthName = monthNames[monthIndex];
 
   calendarTitle.innerText = `${monthName} ${calendar.year}`
+  calendarTitle.classList.add('calendar-title');
 
   contentTitle.innerText = "Calendar";
 

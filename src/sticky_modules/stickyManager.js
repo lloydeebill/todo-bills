@@ -1,11 +1,15 @@
 
 
 class Sticky {
-  constructor(title,detail,color) {
-    this.id = Date.now();
+  constructor(title,detail,color, id=null) {
+    this.id = this.generateUniqueId();
     this.title = title;
     this.detail = detail;
     this.color = color;
+  }
+
+  generateUniqueId() {
+    return `sn-${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
   }
 }
 

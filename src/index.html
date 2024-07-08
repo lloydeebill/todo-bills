@@ -43,9 +43,9 @@
       <div class="task-modal-content">
         <form id="addTaskForm" class="form-content">
           <div class="form-title"><h3>Add Today's Task </h3><span class="close-button">&times;</span></div>
-          <label for="taskName">Task Name:</label>
+          <label for="taskName">Name:</label>
           <input type="text" id="taskName" name="taskName" required>
-          <label for="taskTime">Task Time:  </label>
+          <label for="taskTime">Time:  </label>
           <input type="time" id="taskTime"  name="taskTime" >
           <button class="add-button" type="submit">Submit</button>
         </form>
@@ -56,13 +56,13 @@
       <div class="sticky-modal-content">
         <form id="addStickyForm" class="form-content">
           <div class="form-title"><h3>Add Sticky Note </h3><span class="close-button">&times;</span></div>
-          <label for="stickyName">Sticky Note Title:</label>
+          <label for="stickyName">Title:</label>
           <input type="text" id="stickyName" name="stickyName">
 
-          <label for="stickyDetail">Sticky Details:  </label>
+          <label for="stickyDetail">Details:</label>
           <textarea id="stickyDetail" class="sticky-detail"  name="stickyDetail" ></textarea>
 
-          <label for="stickyColor">Sticky Note Color: </label>
+          <label for="stickyColor">Color: </label>
           <div class="color-picker" id="stickyColorPicker">
             <div class="color-option" data-color="rgb(245, 245, 135)" style="background-color: rgb(245, 245, 135);"></div>
             <div class="color-option" data-color="rgb(122, 183, 252)" style="background-color: rgb(122, 183, 252);"></div>
@@ -79,12 +79,12 @@
 
     <div id="addScheduleModal" class="schedule-modal">
       <div class="schedule-modal-content">
-        <form id="addScheduleForm" class="form-content">
-          <div><h3>Add Schedule Note </h3><span class="close-button">&times;</span></div>
-          <label for="scheduleName">Schedule Note Title:</label>
+        <form id="addScheduleForm" class="form-content schedule">
+          <div class="form-title"><h3>Add Schedule</h3><span class="close-button">&times;</span></div>
+          <label for="scheduleName">Schedule:</label>
           <input type="text" id="scheduleName" name="scheduleName">
 
-          <button class="add-button" type="submit">Add Schedule Detail:</button>
+          <button class="add-button" type="submit">Submit</button>
         </form>
       </div>
     </div>
