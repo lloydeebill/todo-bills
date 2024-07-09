@@ -9,9 +9,40 @@ class Calendar {
     this.closeButton = this.modal.querySelector('.close-button');
     this.currentDayCell = null;
 
+    this.calendarState = this.loadCalendarState() || {};
     this.initializeFormListener();
-    this.loadCalendarState();
+    this.checkInitialSchedules();
+    this.generateCalendar();
   }
+
+  checkInitialSchedules() {
+    const initialSchedulesCreated = localStorage.getItem('initialSchedulesCreated');
+    if (!initialSchedulesCreated) {
+      this.createInitialSchedules();
+      localStorage.setItem('initialSchedulesCreated','true');
+    }
+  }
+
+  createInitialSchedules() {
+    const initialSchedules = [
+      { day: 1, name: 'Morning Exercise' },
+      { day: 3, name: 'Team Meeting' },
+      { day: 5, name: 'Project Deadline' },
+      { day: 6, name: 'Doctor Appointment' }
+    ]
+
+    initialSchedules.forEach(schedule => this.addInitialSchedule(schedule.day,schedule.name));
+  }
+
+  addInitialSchedule(day, scheduleName) {
+    if(!this.calendarState[day]) {
+      this.calendarState[day] = [];
+    }
+
+    this.calendarState[day].push(scheduleName);
+    this.saveCalendarState();
+  }
+
 
   initializeFormListener() {
     const form = this.modal.querySelector('#addScheduleForm');
@@ -151,13 +182,12 @@ class Calendar {
   }
 
   loadCalendarState() {
-    const calendarState = JSON.parse(localStorage.getItem('calendarState'));
+    const calendarState = localStorage.getItem('calendarState');
 
     if (calendarState) {
-      this.calendarState = calendarState;
-    } else {
-      this.calendarState = {};
-    }
+      return JSON.parse(calendarState);
+    } 
+    return null;
   }
 
   loadSchedules() {
