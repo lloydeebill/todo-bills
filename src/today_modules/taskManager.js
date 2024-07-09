@@ -19,13 +19,28 @@ class TaskManager {
     this.taskList = this.loadTasks() || [];
   }
 
-  addTask(name,time) {
+  checkInitialTasks() {
+    const initialTasksCreated = local.getItem('initialTasksCreated');
+    if (!initialTasksCreated) {
+      this.createInitialTasks();
+      localStorage.setItem('initialTasksCreated','true');
+    }
+  }
 
+  createInitialTasks() {
+    const initialTasks = [
+      { name: 'Buy groceries', time: '9:00'},
+      { name: 'Cook lunch', time: '11:30'},
+      { name: 'Research paper',time: '14:00'}
+    ]
+
+    initialTasks.forEach(task => this.addTask(task.name,task.time));
+  }
+
+  addTask(name,time) {
     const newTask = new Task(name,time);
-  
     this.taskList.push(newTask);
     this.saveTasks();
-  
   }
 
   getTaskList() {
