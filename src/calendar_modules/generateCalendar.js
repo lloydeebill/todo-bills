@@ -25,9 +25,9 @@ class Calendar {
 
   createInitialSchedules() {
     const initialSchedules = [
-      { day: 1, name: 'Morning Exercise' },
-      { day: 3, name: 'Team Meeting' },
-      { day: 5, name: 'Project Deadline' },
+      { day: 1, name: 'Anniversary' },
+      { day: 3, name: 'Business presentation' },
+      { day: 5, name: 'Birthday Celebration' },
       { day: 6, name: 'Doctor Appointment' }
     ]
 
