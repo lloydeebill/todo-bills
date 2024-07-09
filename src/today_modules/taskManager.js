@@ -17,10 +17,11 @@ class Task {
 class TaskManager {
   constructor(){
     this.taskList = this.loadTasks() || [];
+    this.checkInitialTasks();
   }
 
   checkInitialTasks() {
-    const initialTasksCreated = local.getItem('initialTasksCreated');
+    const initialTasksCreated = localStorage.getItem('initialTasksCreated');
     if (!initialTasksCreated) {
       this.createInitialTasks();
       localStorage.setItem('initialTasksCreated','true');

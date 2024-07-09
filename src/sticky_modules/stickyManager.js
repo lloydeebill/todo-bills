@@ -16,6 +16,7 @@ class Sticky {
 class StickyManager {
   constructor(){
     this.stickyList = this.loadStickies() || [];
+    this.checkInitialStickies();
   }
 
   checkInitialStickies() {
